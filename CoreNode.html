@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreNode | Mantenimiento y Soporte IT</title>
+    <style>
+        /* =========================================================
+           VARIABLES DE COLOR Y FUENTES
+           ========================================================= */
+        :root {
+            --bg-color: #121315;
+            --bg-card: #1e1f23;
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --gold: #d1ab57; 
+            --gold-hover: #b8954c;
+            --red: #a31c26; 
+            --red-hover: #86161f;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* =========================================================
+           RESETEO BÁSICO
+           ========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* =========================================================
+           NAVEGACIÓN (HEADER)
+           ========================================================= */
+        header {
+            background-color: rgba(18, 19, 21, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--gold);
+            transition: padding 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 55px; /* Tamaño ajustado para el header */
+            height: auto;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo-text span:first-child { color: var(--gold); }
+        .logo-text span:last-child { color: var(--red); }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .btn-remote {
+            background-color: var(--red);
+            padding: 8px 18px;
+            border-radius: 5px;
+            color: white !important;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-remote:hover {
+            background-color: var(--red-hover);
+        }
+
+        /* =========================================================
+           SECCIÓN HERO (PRINCIPAL)
+           ========================================================= */
+        .hero {
+            padding: 160px 20px 100px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-logo {
+            width: 280px; /* Tamaño grande para la sección principal */
+            margin-bottom: 30px;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.5));
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 750px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--bg-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--gold-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(209, 171, 87, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--red);
+            color: var(--red);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--red);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(163, 28, 38, 0.3);
+        }
+
+        /* =========================================================
+           SECCIÓN SERVICIOS
+           ========================================================= */
+        .services {
+            padding: 100px 20px;
+            background-color: #0f1012;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--text-main);
+        }
+
+        .section-title span {
+            border-bottom: 3px solid var(--red);
+            padding-bottom: 10px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            border-top-color: var(--red);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* =========================================================
+           SECCIÓN CONTACTO / SOPORTE
+           ========================================================= */
+        .contact {
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background-color: var(--bg-card);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #333;
+            background-color: #121315;
+            color: white;
+            border-radius: 5px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--red);
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+        footer {
+            background-color: #08090a;
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .footer-logo {
+            width: 60px;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================================
+           ANIMACIONES
+           ========================================================= */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* =========================================================
+           RESPONSIVE (Para celulares)
+           ========================================================= */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* En móvil el menú se oculta por simplicidad */
+            .hero h1 { font-size: 2.2rem; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
+            .contact-form { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <header id="main-header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <!-- LOGO EN LA BARRA DE NAVEGACIÓN -->
+                <img src="CoreNode image.png" alt="Logo CoreNode" class="logo-img">
+                <div class="logo-text">
+                    <span>CORE</span><span>NODE</span>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#contacto" class="btn-remote">Asistencia Remota</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- SECCIÓN HERO -->
+    <section id="inicio" class="hero">
+        <!-- LOGO GRANDE EN EL CENTRO DE LA PÁGINA -->
+        <img src="CoreNode image.png" alt="CoreNode Gran Logo" class="hero-logo">
+        
+        <h1>El Núcleo de tu <span>Estabilidad Tecnológica</span></h1>
+        <p>Expertos en mantenimiento preventivo, correctivo y asistencia remota inmediata. Aseguramos que tus equipos de cómputo funcionen al máximo rendimiento para que tu negocio nunca se detenga.</p>
+        
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="scrollToSection('servicios')">Ver Servicios</button>
+            <button class="btn btn-secondary" onclick="scrollToSection('contacto')">Solicitar Soporte</button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE SERVICIOS -->
+    <section id="servicios" class="services">
+        <h2 class="section-title"><span>Nuestros</span> Servicios</h2>
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>Mantenimiento Preventivo</h3>
+                <p>Nos adelantamos a los fallos. Realizamos limpiezas físicas, actualización de software, eliminación de malware y optimización térmica para alargar la vida útil de tus equipos.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Mantenimiento Correctivo</h3>
+                <p>Solucionamos problemas críticos. Reemplazo de hardware dañado, recuperación de discos duros, reparación de placas base y reinstalación profunda de sistemas operativos.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Asistencia Remota</h3>
+                <p>Soporte técnico inmediato. Mediante conexión segura resolvemos errores de software, configuración de redes, instalación de drivers e impresoras en cuestión de minutos.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Optimización Empresarial</h3>
+                <p>Implementamos mejoras en la arquitectura de red y gestión de servidores locales. Armado de equipos a medida (Workstations y Servidores) para optimizar el flujo de tu empresa.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE CONTACTO -->
+    <section id="contacto" class="contact">
+        <h2 class="section-title"><span>Soporte</span> Técnico</h2>
+        <div class="contact-form">
+            <form action="https://formsubmit.co/dilanalgarrag@gmail.com" method="POST">
+    
+    <!-- Configuración oculta para que el correo se vea más profesional -->
+    <input type="hidden" name="_subject" value="Nuevo Ticket de Soporte - CoreNode">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://tupagina.com/gracias.html"> <!-- Opcional: Redirigir al terminar -->
+
+    <div class="form-group">
+        <label for="nombre">Nombre Completo o Empresa</label>
+        <!-- Fíjate que agregué name="Nombre" -->
+        <input type="text" name="Nombre" id="nombre" placeholder="Ej: Juan Pérez / TechCorp" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="correo">Correo Electrónico</label>
+        <!-- Fíjate que agregué name="Correo_Cliente" -->
+        <input type="email" name="Correo_Cliente" id="correo" placeholder="correo@ejemplo.com" required>
+    </div>
+
+    <div class="form-group">
+        <label for="tipo">Tipo de Servicio Requerido</label>
+        <!-- Fíjate que agregué name="Tipo_de_Servicio" -->
+        <select name="Tipo_de_Servicio" id="tipo" required>
+            <option value="">-- Selecciona una opción --</option>
+            <option value="Preventivo">Mantenimiento Preventivo</option>
+            <option value="Correctivo">Mantenimiento Correctivo (Reparación)</option>
+            <option value="Remoto">Asistencia Remota Inmediata</option>
+            <option value="Cotizacion">Cotización General / Equipos Nuevos</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="mensaje">Descripción del Problema o Requerimiento</label>
+        <!-- Fíjate que agregué name="Mensaje_del_Cliente" -->
+        <textarea name="Mensaje_del_Cliente" id="mensaje" rows="5" placeholder="Describe brevemente el problema que presenta tu equipo o lo que necesitas..." required></textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Enviar Solicitud a CoreNode</button>
+</form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <!-- LOGO EN EL FOOTER -->
+        <img src="CoreNode image.png" alt="CoreNode Logo" class="footer-logo">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> CoreNode. Todos los derechos reservados.</p>
+        <p style="margin-top: 10px; font-size: 0.85rem;">Soluciones Integrales en Hardware y Soporte Remoto.</p>
+    </footer>
+
+    <!-- SCRIPTS INTERACTIVOS -->
+    <script>
+        // Función para scroll suave al hacer clic en los botones
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Simulación de envío de formulario
+        function enviarFormulario(event) {
+            event.preventDefault(); 
+            
+            const nombre = document.getElementById('nombre').value;
+            const tipo = document.getElementById('tipo').value;
+            
+            alert(`¡Mensaje enviado con éxito!\n\nGracias ${nombre}, hemos recibido tu solicitud para soporte '${tipo}'. El equipo técnico de CoreNode te contactará muy pronto.`);
+            
+            document.getElementById('corenodeForm').reset();
+        }
+
+        // Efecto visual: Reduce el tamaño de la barra de navegación al bajar la página
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if(window.scrollY > 50) {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 5px 15px rgba(0,0,0,0.5)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
