@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORENODE - El Núcleo de tu Estabilidad Tecnológica</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        core: {
+                            dark: '#09090b',
+                            card: '#121216',
+                            border: '#27272a',
+                            gold: '#e5c158',
+                            goldHover: '#facc15',
+                            red: '#dc2626',
+                            redHover: '#b91c1c'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(229, 193, 88, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(229, 193, 88, 0.4); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .glow-card {
+            animation: pulse-glow 3s infinite;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fef08a 0%, #e5c158 50%, #ca8a04 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .red-gradient-text {
+            background: linear-gradient(135deg, #f87171 0%, #dc2626 50%, #991b1b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e5c158;
+        }
+    </style>
+</head>
+<body class="bg-core-dark text-gray-100 font-sans antialiased selection:bg-yellow-500 selection:text-black">
+
+    <!-- TOP BAR NOTIFICATION -->
+    <div class="bg-gradient-to-r from-yellow-600 via-amber-500 to-red-600 text-black font-semibold text-xs sm:text-sm py-2 px-4 text-center tracking-wide shadow-md">
+        <i class="fa-solid fa-headset mr-2"></i> Soporte y Asistencia Remota Inmediata 24/7 Disponible <span class="hidden sm:inline">| ¡Llámanos ahora!</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 bg-core-dark/95 backdrop-blur-md border-b border-core-border transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- LOGO -->
+            <a href="#inicio" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-core-card to-black border border-yellow-500/40 flex items-center justify-center shadow-lg group-hover:border-yellow-400 transition-all">
+                    <span class="text-yellow-500 font-extrabold text-xl tracking-tighter">CN</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl sm:text-2xl font-black tracking-widest text-white">CORE<span class="text-red-600">NODE</span></span>
+                    <span class="text-[9px] text-yellow-500 uppercase tracking-widest font-medium">Estabilidad Tecnológica</span>
+                </div>
+            </a>
+
+            <!-- DESKTOP NAV LINKS -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#inicio" class="text-gray-300 hover:text-yellow-400 transition-colors">Inicio</a>
+                <a href="#nosotros" class="text-gray-300 hover:text-yellow-400 transition-colors">Misión y Visión</a>
+                <a href="#servicios" class="text-gray-300 hover:text-yellow-400 transition-colors">Servicios</a>
+                <a href="#diagnostico" class="text-gray-300 hover:text-yellow-400 transition-colors">Diagnóstico IA</a>
+                <a href="#contacto" class="text-gray-300 hover:text-yellow-400 transition-colors">Contacto</a>
+            </nav>
+
+            <!-- CTA BUTTON -->
+            <div class="hidden md:block">
+                <button onclick="openRemoteModal()" class="relative group overflow-hidden rounded-xl p-[2px] font-semibold text-sm transition-all shadow-lg hover:scale-105">
+                    <span class="absolute inset-0 bg-gradient-to-r from-red-600 to-yellow-500 transition-all duration-300 group-hover:opacity-90"></span>
+                    <span class="relative px-5 py-2.5 bg-core-dark rounded-[10px] flex items-center gap-2 text-white group-hover:bg-opacity-0 transition-all">
+                        <i class="fa-solid fa-desktop text-red-500 group-hover:text-white"></i> ASISTENCIA REMOTA
+                    </span>
+                </button>
+            </div>
+
+            <!-- MOBILE MENU BUTTON -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-yellow-500 focus:outline-none p-2 text-2xl">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- MOBILE MENU DROPDOWN -->
+        <div id="mobile-menu" class="hidden md:hidden bg-core-card border-b border-core-border px-6 py-6 space-y-4">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-yellow-400 font-medium">Inicio</a>
+            <a href="#nosotros" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-yellow-400 font-medium">Misión y Visión</a>
+            <a href="#servicios" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-yellow-400 font-medium">Servicios</a>
+            <a href="#diagnostico" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-yellow-400 font-medium">Diagnóstico IA</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-yellow-400 font-medium">Contacto</a>
+            <button onclick="toggleMobileMenu(); openRemoteModal();" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold shadow-md flex items-center justify-center gap-2">
+                <i class="fa-solid fa-desktop"></i> Asistencia Remota
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative overflow-hidden pt-16 pb-28 lg:pt-24 lg:pb-36 bg-gradient-to-b from-core-dark via-[#101015] to-core-dark">
+        <!-- Background Glow Elements -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-core-card border border-yellow-500/30 text-yellow-400 text-xs sm:text-sm font-semibold mb-8 animate-float">
+                    <i class="fa-solid fa-shield-halved text-red-500"></i> Expertos Certificados en Soporte TI
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                    El Núcleo de tu <span class="gold-gradient-text">Estabilidad Tecnológica</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-lg sm:text-xl text-gray-300 mb-10 leading-relaxed max-w-3xl mx-auto">
+                    Expertos en mantenimiento preventivo, correctivo y asistencia remota inmediata. Aseguramos que tus equipos de cómputo funcionen al máximo rendimiento para que tu negocio <span class="text-yellow-400 font-semibold">nunca se detenga</span>.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#servicios" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold hover:from-yellow-400 hover:to-amber-500 transition-all shadow-lg hover:shadow-yellow-500/20 text-center">
+                        <i class="fa-solid fa-cogs mr-2"></i> Ver Nuestros Servicios
+                    </a>
+                    <button onclick="openRemoteModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-core-card border border-red-600/50 text-white font-bold hover:bg-red-950/30 hover:border-red-500 transition-all shadow-lg text-center flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-headset text-red-500"></i> Solicitar Asistencia
+                    </button>
+                </div>
+            </div>
+
+            <!-- STATS GRID -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-core-card/60 backdrop-blur-md border border-core-border rounded-2xl p-6 text-center hover:border-yellow-500/40 transition-all">
+                    <div class="text-3xl sm:text-4xl font-black text-yellow-400 mb-1">+1,500</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Equipos Reparados</div>
+                </div>
+                <div class="bg-core-card/60 backdrop-blur-md border border-core-border rounded-2xl p-6 text-center hover:border-yellow-500/40 transition-all">
+                    <div class="text-3xl sm:text-4xl font-black text-red-500 mb-1">15 min</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Respuesta Promedio</div>
+                </div>
+                <div class="bg-core-card/60 backdrop-blur-md border border-core-border rounded-2xl p-6 text-center hover:border-yellow-500/40 transition-all">
+                    <div class="text-3xl sm:text-4xl font-black text-yellow-400 mb-1">99.8%</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Clientes Satisfechos</div>
+                </div>
+                <div class="bg-core-card/60 backdrop-blur-md border border-core-border rounded-2xl p-6 text-center hover:border-yellow-500/40 transition-all">
+                    <div class="text-3xl sm:text-4xl font-black text-red-500 mb-1">24/7</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Soporte Técnico</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE NOSOTROS & MISIÓN / VISIÓN -->
+    <section id="nosotros" class="py-24 bg-core-card/30 border-y border-core-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-yellow-500 font-bold uppercase tracking-widest text-xs bg-yellow-500/10 px-3 py-1 rounded-md border border-yellow-500/20">Quiénes Somos</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-4">Ingeniería y Soporte en el Núcleo de tu Empresa</h2>
+                <p class="text-gray-400">CORENODE nace con la visión de transformar la gestión tecnológica corporativa y personal, garantizando uptime absoluto y máxima seguridad en cada sistema.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- MISIÓN -->
+                <div class="bg-core-card border border-core-border hover:border-yellow-500/50 rounded-3xl p-8 sm:p-10 transition-all flex flex-col justify-between group shadow-xl">
+                    <div>
+                        <div class="w-16 h-16 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-2xl mb-6 group-hover:bg-yellow-500 group-hover:text-black transition-all">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Nuestra Misión</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Proveer soluciones tecnológicas integrales de alta calidad a través de mantenimiento preventivo, correctivo y asistencia remota inmediata. Maximizamos la continuidad operativa de nuestros clientes con un servicio ágil, seguro y altamente profesional.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-core-border flex items-center gap-3 text-sm text-yellow-400 font-semibold">
+                        <i class="fa-solid fa-check-circle"></i> Eficiencia y rapidez garantizada
+                    </div>
+                </div>
+
+                <!-- VISIÓN -->
+                <div class="bg-core-card border border-core-border hover:border-red-500/50 rounded-3xl p-8 sm:p-10 transition-all flex flex-col justify-between group shadow-xl">
+                    <div>
+                        <div class="w-16 h-16 rounded-2xl bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 text-2xl mb-6 group-hover:bg-red-600 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Nuestra Visión</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Ser la empresa líder y referente en soporte técnico avanzado y consultoría informática en la región, reconocida por nuestra innovación en asistencia remota, solidez en seguridad de datos y compromiso inquebrantable con la estabilidad tecnológica de nuestros aliados.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-core-border flex items-center gap-3 text-sm text-red-500 font-semibold">
+                        <i class="fa-solid fa-arrow-trend-up"></i> Liderazgo e innovación constante
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE VALUES -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-core-dark border border-core-border text-center">
+                    <div class="text-yellow-400 text-xl mb-3"><i class="fa-solid fa-bolt"></i></div>
+                    <h4 class="font-bold text-white mb-1">Velocidad</h4>
+                    <p class="text-xs text-gray-400">Respuesta inmediata ante cualquier emergencia.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-core-dark border border-core-border text-center">
+                    <div class="text-red-500 text-xl mb-3"><i class="fa-solid fa-lock"></i></div>
+                    <h4 class="font-bold text-white mb-1">Seguridad</h4>
+                    <p class="text-xs text-gray-400">Protección rigurosa de tu información.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-core-dark border border-core-border text-center">
+                    <div class="text-yellow-400 text-xl mb-3"><i class="fa-solid fa-award"></i></div>
+                    <h4 class="font-bold text-white mb-1">Calidad</h4>
+                    <p class="text-xs text-gray-400">Estándares profesionales en cada diagnóstico.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-core-dark border border-core-border text-center">
+                    <div class="text-red-500 text-xl mb-3"><i class="fa-solid fa-handshake"></i></div>
+                    <h4 class="font-bold text-white mb-1">Confianza</h4>
+                    <p class="text-xs text-gray-400">Transparencia y honestidad en cada servicio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="py-28 bg-core-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="text-red-500 font-bold uppercase tracking-widest text-xs bg-red-500/10 px-3 py-1 rounded-md border border-red-500/20">Nuestros Servicios</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-4 mb-4">Soluciones Integrales para tu Infraestructura TI</h2>
+                <p class="text-gray-400">Desde la prevención hasta la solución correctiva de alta complejidad, cubrimos todas las necesidades tecnológicas de tu empresa.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Servicio 1 -->
+                <div class="bg-core-card border border-core-border hover:border-yellow-500/60 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 group shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-2xl mb-6 group-hover:bg-yellow-500 group-hover:text-black transition-all">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Mantenimiento Preventivo</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Limpieza interna profunda, cambio de pasta térmica, optimización de software, revisión de discos y prevención de fallas antes de que detengan tu operación.
+                        </p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-yellow-500"></i> Limpieza física y de componentes</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-yellow-500"></i> Actualización de parches y sistema</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-yellow-500"></i> Diagnóstico preventivo de hardware</li>
+                        </ul>
+                    </div>
+                    <button onclick="openServiceModal('Mantenimiento Preventivo')" class="w-full py-3 rounded-xl bg-core-dark border border-yellow-500/40 text-yellow-400 font-semibold hover:bg-yellow-500 hover:text-black transition-all text-sm">
+                        Solicitar Servicio
+                    </button>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="bg-core-card border border-core-border hover:border-red-500/60 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 group shadow-xl flex flex-col justify-between relative">
+                    <div class="absolute -top-3 right-8 bg-red-600 text-white text-[10px] uppercase font-bold px-3 py-1 rounded-full shadow-md">Más Solicitado</div>
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 text-2xl mb-6 group-hover:bg-red-600 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Mantenimiento Correctivo</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Reparación experta de equipos con fallas críticas, reemplazo de piezas dañadas (pantallas, teclados, fuentes, discos SSD), eliminación de malware avanzado y recuperación de sistemas.
+                        </p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500"></i> Reemplazo de componentes dañados</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500"></i> Reparación de placa base y circuitos</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500"></i> Eliminación de virus y troyanos</li>
+                        </ul>
+                    </div>
+                    <button onclick="openServiceModal('Mantenimiento Correctivo')" class="w-full py-3 rounded-xl bg-core-dark border border-red-600/40 text-red-500 font-semibold hover:bg-red-600 hover:text-white transition-all text-sm">
+                        Solicitar Servicio
+                    </button>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="bg-core-card border border-core-border hover:border-yellow-500/60 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 group shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-2xl mb-6 group-hover:bg-yellow-500 group-hover:text-black transition-all">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Asistencia Remota Inmediata</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Conexión segura en minutos para resolver errores de software, configuración de impresoras, instalación de programas y soporte a usuarios sin necesidad de esperar un técnico presencial.
+                        </p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-yellow-500"></i> Soporte remoto en menos de 15 min</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-yellow-500"></i> Configuración de correo y redes</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-yellow-500"></i> Solución de errores del sistema</li>
+                        </ul>
+                    </div>
+                    <button onclick="openRemoteModal()" class="w-full py-3 rounded-xl bg-core-dark border border-yellow-500/40 text-yellow-400 font-semibold hover:bg-yellow-500 hover:text-black transition-all text-sm">
+                        Conectar Ahora
+                    </button>
+                </div>
+            </div>
+
+            <!-- ADICIONAL SERVICIOS ROW -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-core-card border border-core-border rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-center">
+                    <div class="w-16 h-16 rounded-2xl bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 text-3xl shrink-0">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-2">Redes y Seguridad Informática</h4>
+                        <p class="text-gray-400 text-sm">Diseño, cableado estructurado, configuración de routers, firewalls, VPNs corporativas y auditorías de seguridad para proteger la información de tu empresa.</p>
+                    </div>
+                </div>
+                <div class="bg-core-card border border-core-border rounded-3xl p-8 flex flex-col sm:flex-row gap-6 items-center">
+                    <div class="w-16 h-16 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-3xl shrink-0">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-2">Respaldo y Recuperación de Datos</h4>
+                        <p class="text-gray-400 text-sm">Estrategias automatizadas de copias de seguridad en la nube o servidores locales, y recuperación especializada de archivos en discos dañados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE DIAGNOSTIC WIDGET -->
+    <section id="diagnostico" class="py-24 bg-gradient-to-b from-core-dark to-core-card/50 border-t border-core-border">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-yellow-500 font-bold uppercase tracking-widest text-xs bg-yellow-500/10 px-3 py-1 rounded-md border border-yellow-500/20">Asistente Interactivo</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-4">¿Qué problema presenta tu equipo?</h2>
+                <p class="text-gray-400">Selecciona el síntoma principal para obtener una recomendación técnica inmediata de nuestros expertos en CORENODE.</p>
+            </div>
+
+            <div class="bg-core-card border border-core-border rounded-3xl p-6 sm:p-10 shadow-2xl">
+                <!-- Diagnostic Options -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <button onclick="selectSymptom('lento')" id="btn-lento" class="diagnostic-btn p-5 rounded-2xl bg-core-dark border border-core-border hover:border-yellow-500 text-left transition-all group">
+                        <div class="text-yellow-500 text-2xl mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-gauge-high"></i></div>
+                        <h4 class="font-bold text-white text-sm mb-1">Muy Lento / Congelado</h4>
+                        <p class="text-xs text-gray-400">Tarda en abrir programas.</p>
+                    </button>
+                    <button onclick="selectSymptom('no-enciende')" id="btn-no-enciende" class="diagnostic-btn p-5 rounded-2xl bg-core-dark border border-core-border hover:border-red-500 text-left transition-all group">
+                        <div class="text-red-500 text-2xl mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-power-off"></i></div>
+                        <h4 class="font-bold text-white text-sm mb-1">No Enciende</h4>
+                        <p class="text-xs text-gray-400">Sin luz ni respuesta.</p>
+                    </button>
+                    <button onclick="selectSymptom('virus')" id="btn-virus" class="diagnostic-btn p-5 rounded-2xl bg-core-dark border border-core-border hover:border-yellow-500 text-left transition-all group">
+                        <div class="text-yellow-500 text-2xl mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-bug"></i></div>
+                        <h4 class="font-bold text-white text-sm mb-1">Virus o Publicidad</h4>
+                        <p class="text-xs text-gray-400">Ventanas emergentes raras.</p>
+                    </button>
+                    <button onclick="selectSymptom('internet')" id="btn-internet" class="diagnostic-btn p-5 rounded-2xl bg-core-dark border border-core-border hover:border-red-500 text-left transition-all group">
+                        <div class="text-red-500 text-2xl mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-wifi"></i></div>
+                        <h4 class="font-bold text-white text-sm mb-1">Sin Conexión a Red</h4>
+                        <p class="text-xs text-gray-400">Falla de Wi-Fi o internet.</p>
+                    </button>
+                </div>
+
+                <!-- Result Box -->
+                <div id="diagnostic-result" class="hidden bg-core-dark border border-yellow-500/40 rounded-2xl p-6 sm:p-8 animate-fadeIn">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div>
+                            <span class="text-xs font-semibold text-yellow-400 uppercase tracking-wider mb-1 block"><i class="fa-solid fa-robot mr-1"></i> Diagnóstico Preliminar CORENODE</span>
+                            <h3 id="result-title" class="text-xl font-bold text-white mb-2">Optimización y Mantenimiento Recomendado</h3>
+                            <p id="result-desc" class="text-gray-300 text-sm leading-relaxed mb-4">Este problema suele deberse a acumulación de archivos temporales, falta de limpieza física o disco saturado. Se sugiere Mantenimiento Preventivo y Optimización SSD.</p>
+                            <div class="flex items-center gap-4 text-xs text-gray-400">
+                                <span><i class="fa-solid fa-clock text-yellow-500 mr-1"></i> Tiempo estimado: 1-2 horas</span>
+                                <span><i class="fa-solid fa-shield-halved text-green-500 mr-1"></i> Garantía CORENODE incluida</span>
+                            </div>
+                        </div>
+                        <button onclick="openRemoteModal()" class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold rounded-xl hover:from-yellow-400 hover:to-amber-500 transition-all shadow-lg shrink-0">
+                            Resolver Ahora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="py-24 bg-core-card/20 border-t border-core-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-yellow-500 font-bold uppercase tracking-widest text-xs bg-yellow-500/10 px-3 py-1 rounded-md border border-yellow-500/20">Testimonios</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-4">Lo que dicen nuestros clientes</h2>
+                <p class="text-gray-400">Empresas y profesionales que confían su estabilidad tecnológica en CORENODE.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-core-card border border-core-border p-8 rounded-3xl relative shadow-lg">
+                    <div class="text-yellow-500 mb-4 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-6">"El servicio de asistencia remota de CORENODE es increíble. Teníamos un problema crítico con la red de la oficina y lo resolvieron en menos de 20 minutos sin interrumpir nuestras ventas."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-500 to-amber-700 flex items-center justify-center font-bold text-black text-lg">CR</div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Carlos Ramirez</h4>
+                            <p class="text-xs text-gray-400">Gerente Comercial - Logística Andina</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-core-card border border-core-border p-8 rounded-3xl relative shadow-lg">
+                    <div class="text-yellow-500 mb-4 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-6">"Llevamos los computadores de nuestra firma contable para mantenimiento preventivo. El cambio fue radical, ahora vuelan y nos dieron excelente asesoría en respaldos."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center font-bold text-white text-lg">AM</div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Ana María Silva</h4>
+                            <p class="text-xs text-gray-400">Directora Financiera</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-core-card border border-core-border p-8 rounded-3xl relative shadow-lg">
+                    <div class="text-yellow-500 mb-4 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-6">"La atención y profesionalismo de CORENODE es de otro nivel. Son verdaderamente el núcleo de nuestra estabilidad tecnológica. ¡100% recomendados!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-500 to-red-600 flex items-center justify-center font-bold text-white text-lg">JD</div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Julián Duarte</h4>
+                            <p class="text-xs text-gray-400">Ingeniero de Proyectos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="py-24 bg-core-dark border-t border-core-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-yellow-500 font-bold uppercase tracking-widest text-xs bg-yellow-500/10 px-3 py-1 rounded-md border border-yellow-500/20">Preguntas Frecuentes</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-4">Resolvemos tus Dudas</h2>
+                <p class="text-gray-400">Todo lo que necesitas saber sobre nuestros servicios de soporte técnico.</p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="group bg-core-card border border-core-border rounded-2xl p-6 transition-all">
+                    <summary class="flex justify-between items-center font-semibold text-white cursor-pointer list-none">
+                        <span>¿Cómo funciona la asistencia remota inmediata?</span>
+                        <span class="transition group-open:rotate-180 text-yellow-500"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-300 text-sm mt-4 leading-relaxed">
+                        Te conectas mediante una herramienta segura de soporte (como AnyDesk o TeamViewer), nuestros técnicos acceden con tu autorización para diagnosticar y solucionar el problema en tiempo real mientras tú observas en pantalla.
+                    </p>
+                </details>
+
+                <details class="group bg-core-card border border-core-border rounded-2xl p-6 transition-all">
+                    <summary class="flex justify-between items-center font-semibold text-white cursor-pointer list-none">
+                        <span>¿Cada cuánto tiempo se recomienda el mantenimiento preventivo?</span>
+                        <span class="transition group-open:rotate-180 text-yellow-500"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-300 text-sm mt-4 leading-relaxed">
+                        Recomendamos realizar un mantenimiento preventivo (limpieza física y optimización de software) cada 6 meses para equipos de oficina y cada 3 meses para equipos expuestos a alta exigencia o polvo.
+                    </p>
+                </details>
+
+                <details class="group bg-core-card border border-core-border rounded-2xl p-6 transition-all">
+                    <summary class="flex justify-between items-center font-semibold text-white cursor-pointer list-none">
+                        <span>¿Ofrecen garantía en las reparaciones y repuestos?</span>
+                        <span class="transition group-open:rotate-180 text-yellow-500"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-300 text-sm mt-4 leading-relaxed">
+                        Sí, todos nuestros mantenimientos correctivos y repuestos nuevos cuentan con garantía certificada por CORENODE para tu total tranquilidad y seguridad.
+                    </p>
+                </details>
+
+                <details class="group bg-core-card border border-core-border rounded-2xl p-6 transition-all">
+                    <summary class="flex justify-between items-center font-semibold text-white cursor-pointer list-none">
+                        <span>¿Atienden tanto a empresas como a personas naturales?</span>
+                        <span class="transition group-open:rotate-180 text-yellow-500"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-300 text-sm mt-4 leading-relaxed">
+                        ¡Absolutamente! Contamos con planes corporativos mensuales con SLA garantizado, así como servicio puntual por demanda para computadores personales y portátiles particulares.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO Y FOOTER -->
+    <section id="contacto" class="py-24 bg-core-card/40 border-t border-core-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Info Contacto -->
+                <div>
+                    <span class="text-red-500 font-bold uppercase tracking-widest text-xs bg-red-500/10 px-3 py-1 rounded-md border border-red-500/20">Contacto Directo</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-4 mb-6">Estamos listos para asegurar tu tecnología</h2>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Comunícate con nuestro equipo técnico o déjanos un mensaje. Te responderemos en pocos minutos para brindarte la mejor solución.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-xl shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-gray-400 uppercase font-medium">Línea de Atención / WhatsApp</h4>
+                                <p class="text-white font-bold text-lg">+57 319 6567524</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 text-xl shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-gray-400 uppercase font-medium">Correo Electrónico</h4>
+                                <p class="text-white font-bold text-lg">gabrielurbina052009@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-gray-400 uppercase font-medium">Ubicación Principal</h4>
+                                <p class="text-white font-bold text-lg">Centro Tecnológico</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario -->
+                <div class="bg-core-card border border-core-border rounded-3xl p-8 sm:p-10 shadow-2xl">
+                    <h3 class="text-2xl font-bold text-white mb-6">Envíanos un Mensaje</h3>
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Nombre Completo</label>
+                            <input type="text" required placeholder="Ej. Juan Pérez" class="w-full bg-core-dark border border-core-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-all text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Correo o Teléfono</label>
+                            <input type="text" required placeholder="correo@empresa.com o celular" class="w-full bg-core-dark border border-core-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-all text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Servicio Requerido</label>
+                            <select id="form-service" class="w-full bg-core-dark border border-core-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-all text-sm">
+                                <option>Asistencia Remota Inmediata</option>
+                                <option>Mantenimiento Preventivo</option>
+                                <option>Mantenimiento Correctivo</option>
+                                <option>Redes y Seguridad</option>
+                                <option>Otro servicio técnico</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Cuéntanos sobre tu equipo o problema</label>
+                            <textarea rows="4" required placeholder="Describe brevemente el fallo o necesidad..." class="w-full bg-core-dark border border-core-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-all text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold rounded-xl hover:from-yellow-400 hover:to-amber-500 transition-all shadow-lg text-center">
+                            <i class="fa-solid fa-paper-plane mr-2"></i> Enviar Solicitud
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-core-border py-12 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-core-card border border-yellow-500/40 flex items-center justify-center">
+                    <span class="text-yellow-500 font-extrabold text-sm">CN</span>
+                </div>
+                <span class="text-lg font-bold text-white tracking-widest">CORE<span class="text-red-600">NODE</span></span>
+            </div>
+            <p class="text-xs text-center md:text-left text-gray-500">
+                © 2026 CORENODE. Todos los derechos reservados. El Núcleo de tu Estabilidad Tecnológica.
+            </p>
+            <div class="flex space-x-6 text-xl">
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE ASISTENCIA REMOTA / SERVICIO -->
+    <div id="modal-container" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fadeIn">
+        <div class="bg-core-card border border-yellow-500/40 rounded-3xl max-w-lg w-full p-8 shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-3xl mx-auto mb-4">
+                    <i id="modal-icon" class="fa-solid fa-headset"></i>
+                </div>
+                <h3 id="modal-title" class="text-2xl font-extrabold text-white">Solicitar Asistencia Remota</h3>
+                <p id="modal-subtitle" class="text-gray-400 text-sm mt-1">Conéctate en segundos con un ingeniero certificado de CORENODE.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Tu Nombre o Empresa</label>
+                    <input type="text" id="modal-name" placeholder="Nombre completo" class="w-full bg-core-dark border border-core-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Número de Teléfono / WhatsApp</label>
+                    <input type="text" id="modal-phone" placeholder="Ej. 3001234567" class="w-full bg-core-dark border border-core-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-yellow-500">
+                </div>
+                <button onclick="submitModal()" class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold rounded-xl hover:from-yellow-400 hover:to-amber-500 transition-all shadow-lg mt-2">
+                    Iniciar Conexión / Ticket
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENSAJE DE ÉXITO FLOTANTE -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-core-card border border-yellow-500 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 animate-bounce">
+        <i class="fa-solid fa-circle-check text-yellow-500 text-xl"></i>
+        <div>
+            <h4 class="font-bold text-sm">¡Solicitud Exitosa!</h4>
+            <p class="text-xs text-gray-300">Un técnico de CORENODE te contactará en breve.</p>
+        </div>
+    </div>
+
+    <!-- SCRIPTS DE INTERACCIÓN -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            if(menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        }
+
+        // Modal Functions
+        function openRemoteModal() {
+            document.getElementById('modal-title').innerText = "Asistencia Remota Inmediata";
+            document.getElementById('modal-subtitle').innerText = "Ingresa tus datos para asignarte un técnico de inmediato.";
+            document.getElementById('modal-icon').className = "fa-solid fa-desktop";
+            document.getElementById('modal-container').classList.remove('hidden');
+            document.getElementById('modal-container').classList.add('flex');
+        }
+
+        function openServiceModal(serviceName) {
+            document.getElementById('modal-title').innerText = "Solicitar " + serviceName;
+            document.getElementById('modal-subtitle').innerText = "Completa tus datos para coordinar el servicio con CORENODE.";
+            document.getElementById('modal-icon').className = "fa-solid fa-screwdriver-wrench";
+            document.getElementById('modal-container').classList.remove('hidden');
+            document.getElementById('modal-container').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-container').classList.remove('flex');
+            document.getElementById('modal-container').classList.add('hidden');
+        }
+
+        function submitModal() {
+            const name = document.getElementById('modal-name').value;
+            if(!name) {
+                alert("Por favor ingresa tu nombre.");
+                return;
+            }
+            closeModal();
+            showToast();
+        }
+
+        // Contact Form Submit
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast();
+            e.target.reset();
+        }
+
+        // Toast Notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Diagnostic Interactive Widget
+        function selectSymptom(type) {
+            // Remove active borders
+            document.querySelectorAll('.diagnostic-btn').forEach(btn => {
+                btn.classList.remove('border-yellow-500', 'border-red-500', 'bg-core-card');
+                btn.classList.add('border-core-border', 'bg-core-dark');
+            });
+
+            const btn = document.getElementById('btn-' + type);
+            btn.classList.remove('border-core-border', 'bg-core-dark');
+            if(type === 'lento' || type === 'virus') {
+                btn.classList.add('border-yellow-500', 'bg-core-card');
+            } else {
+                btn.classList.add('border-red-500', 'bg-core-card');
+            }
+
+            const resultBox = document.getElementById('diagnostic-result');
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
+
+            resultBox.classList.remove('hidden');
+
+            if(type === 'lento') {
+                title.innerText = "Diagnóstico: Optimización de Rendimiento y Limpieza";
+                desc.innerText = "El equipo presenta saturación en disco o memoria. Recomendamos Mantenimiento Preventivo completo y migración a disco estado sólido (SSD) si aplica.";
+            } else if(type === 'no-enciende') {
+                title.innerText = "Diagnóstico: Fallo de Energía o Componente Crítico";
+                desc.innerText = "Puede tratarse de fuente de poder, batería o corto en tarjeta madre. Requiere Mantenimiento Correctivo presencial prioritario.";
+            } else if(type === 'virus') {
+                title.innerText = "Diagnóstico: Infección de Malware / Adware";
+                desc.innerText = "Detectamos riesgo de software malicioso. Se requiere limpieza de archivos temporales, escaneo profundo con antivirus certificado y restauración de navegadores.";
+            } else if(type === 'internet') {
+                title.innerText = "Diagnóstico: Fallo en Adaptador de Red o Configuración IP";
+                desc.innerText = "Posible controlador desactualizado, fallo de antena Wi-Fi o error en parámetros de DNS. Podemos solucionarlo por Asistencia Remota Inmediata.";
+            }
+        }
+    </script>
+</body>
+</html>
